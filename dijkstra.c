@@ -175,7 +175,13 @@ int main () {
     add_edge(g, 'c', 'd', 11);
     add_edge(g, 'c', 'f', 2);
     add_edge(g, 'd', 'e', 6);
-    add_edge(g, 'e', 'f', 9);
+    add_edge(g, 'e', 'f', 7);
+    add_edge(g, 'e', 'd', 15);
+    add_edge(g, 'e', 'h', 9);
+    add_edge(g, 'g', 'c', 2);
+    add_edge(g, 'g', 'h', 10);
+    add_edge(g, 'h', 'i', 4);
+    add_edge(g, 'h', 'a', 12);
     clock_t  start = clock();
     dijkstra(g, 'a', 'e');
     clock_t  end = clock();
