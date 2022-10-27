@@ -182,6 +182,6 @@ int main () {
     clock_t  end = clock();
 
     double timeSpent = (double)(end - start);
-    printf("time spent: %d \n",timeSpent);
+    printf("time spent: %f \n",timeSpent);
     return 0;
 }
