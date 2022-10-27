@@ -195,13 +195,18 @@ int main () {
     add_edge(g, 'i', 'c', 2);
     add_edge(g, 'i', 'g', 6);
     add_edge(g, 'i', 'h', 7);
-        
-    clock_t  start = clock();
-    dijkstra(g, 'a', 'e');
-    clock_t  end = clock();
-    print_path(g, 'e');
+    
+    double sum = 0;
+    for(int i = 0; i<100; i++){
+        clock_t  start = clock();
+        dijkstra(g, 'a', 'e');
+        print_path(g, 'e');
+        clock_t  end = clock();
+        double timeSpent = (double)(end - start)/CLOCKS_PER_SEC;
+        sum += timeSpent;
+    }
 
-    double timeSpent = (double)(end - start)/CLOCKS_PER_SEC;
-    printf("time spent: %f \n",timeSpent);
+    double avgTime = sum/100
+    printf("time spent: %f \n",avgTime);
     return 0;
 }
