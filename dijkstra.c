@@ -167,27 +167,41 @@ void print_path (graph_t *g, int i) {
 int main () {
 
     graph_t *g = calloc(1, sizeof (graph_t));
-    add_edge(g, 'a', 'b', 7);
-    add_edge(g, 'a', 'c', 9);
-    add_edge(g, 'a', 'f', 14);
-    add_edge(g, 'b', 'c', 10);
-    add_edge(g, 'b', 'd', 15);
-    add_edge(g, 'c', 'd', 11);
-    add_edge(g, 'c', 'f', 2);
-    add_edge(g, 'd', 'e', 6);
-    add_edge(g, 'e', 'f', 7);
-    add_edge(g, 'e', 'd', 15);
-    add_edge(g, 'e', 'h', 9);
-    add_edge(g, 'g', 'c', 2);
-    add_edge(g, 'g', 'h', 10);
-    add_edge(g, 'h', 'i', 4);
-    add_edge(g, 'h', 'a', 12);
+    add_edge(g, 'a', 'b', 4);
+    add_edge(g, 'a', 'h', 8);
+    add_edge(g, 'b', 'a', 4);
+    add_edge(g, 'b', 'c', 8);
+    add_edge(g, 'b', 'h', 11);
+    add_edge(g, 'c', 'b', 8);
+    add_edge(g, 'c', 'd', 7);
+    add_edge(g, 'c', 'f', 4);
+    add_edge(g, 'c', 'i', 2);
+    add_edge(g, 'd', 'c', 7);
+    add_edge(g, 'd', 'e', 9);
+    add_edge(g, 'd', 'f', 14);
+    add_edge(g, 'e', 'd', 9);
+    add_edge(g, 'e', 'f', 10);
+    add_edge(g, 'f', 'c', 4);
+    add_edge(g, 'f', 'd', 14);
+    add_edge(g, 'f', 'e', 10);
+    add_edge(g, 'f', 'g', 2);
+    add_edge(g, 'g', 'f', 2);
+    add_edge(g, 'g', 'h', 1);
+    add_edge(g, 'g', 'i', 6);
+    add_edge(g, 'h', 'a', 8);
+    add_edge(g, 'h', 'b', 11);
+    add_edge(g, 'h', 'g', 1);
+    add_edge(g, 'h', 'i', 7);
+    add_edge(g, 'i', 'c', 2);
+    add_edge(g, 'i', 'g', 6);
+    add_edge(g, 'i', 'h', 7);
+        
     clock_t  start = clock();
     dijkstra(g, 'a', 'e');
     clock_t  end = clock();
     print_path(g, 'e');
 
-    double timeSpent = (double)(end - start);
+    double timeSpent = (double)(end - start)/CLOCKS_PER_SEC;
     printf("time spent: %f \n",timeSpent);
     return 0;
 }
