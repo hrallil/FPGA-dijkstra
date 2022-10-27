@@ -161,7 +161,7 @@ void print_path (graph_t *g, int i) {
     path[n - 1] = 'a' + i;
     for (j = 0, u = v; u->dist; u = g->vertices[u->prev], j++)
         path[n - j - 2] = 'a' + u->prev;
-    printf("%d %.*s\n", v->dist, n, path);
+    //printf("%d %.*s\n", v->dist, n, path);
 }
 
 int main () {
