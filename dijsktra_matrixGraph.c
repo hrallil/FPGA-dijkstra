@@ -5,6 +5,7 @@
 #include <limits.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <time.h>
 
 // Number of vertices in the graph
 #define V 9
@@ -80,25 +81,34 @@ void dijkstra(int graph[V][V], int src)
     }
 
     // print the constructed distance array
-    //printSolution(dist);
+    printSolution(dist);
 }
 
 // driver's code
 int main()
 {
     /* Let us create the example graph discussed above */
+    //                    a  b  c  d  e  f  g  h  i
     int graph[V][V] = { { 0, 4, 0, 0, 0, 0, 0, 8, 0 },
-                        { 4, 0, 8, 0, 0, 0, 0, 11, 0 },
+                        { 4, 0, 8, 0, 0, 0, 0,11, 0 },
                         { 0, 8, 0, 7, 0, 4, 0, 0, 2 },
-                        { 0, 0, 7, 0, 9, 14, 0, 0, 0 },
-                        { 0, 0, 0, 9, 0, 10, 0, 0, 0 },
-                        { 0, 0, 4, 14, 10, 0, 2, 0, 0 },
+                        { 0, 0, 7, 0, 9,14, 0, 0, 0 },
+                        { 0, 0, 0, 9, 0,10, 0, 0, 0 },
+                        { 0, 0, 4,14,10, 0, 2, 0, 0 },
                         { 0, 0, 0, 0, 0, 2, 0, 1, 6 },
-                        { 8, 11, 0, 0, 0, 0, 1, 0, 7 },
+                        { 8,11, 0, 0, 0, 0, 1, 0, 7 },
                         { 0, 0, 2, 0, 0, 0, 6, 7, 0 } };
 
     // Function call
-    dijkstra(graph, 0);
-
+    double sumTime = 0;
+    for (int i = 0; i < 100; ++i){
+        clock_t start = clock();
+        dijkstra(graph, 0);
+        clock_t end = clock();
+        double timeSpent = (double)(end - start)/CLOCKS_PER_SEC;
+        sumTime = sumTime + timeSpent;
+    }
+    double timeResult = sumTime / 100;
+    printf("Average time spent: %f", timeResult);
     return 0;
 }
