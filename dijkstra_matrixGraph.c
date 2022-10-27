@@ -81,7 +81,7 @@ void dijkstra(int graph[V][V], int src)
     }
 
     // print the constructed distance array
-    printSolution(dist);
+    //printSolution(dist);
 }
 
 // driver's code
