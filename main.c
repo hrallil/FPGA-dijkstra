@@ -312,69 +312,38 @@ void translateMatrixToAdjacency(int graph[V][V], int size, graph_t *g){
 
 // driver's code
 int main(){
-
-    //              Matrix Graph
     int graph[V][V];
     makeGraph(graph, V, true);
+    timeCalcDijkstra(graph, true);
+    timeCalcDijkstra(graph, false);
+    makeGraph(graph, V, false);
+    timeCalcDijkstra(graph, true);
+    timeCalcDijkstra(graph, false);
+
+    return 0;
+}
+
+void timeCalcDijkstra(int graph[V][V], bool matrix){
+    graph_t *g = calloc(1, sizeof (graph_t));
+    translateMatrixToAdjacency(graph, V, g);
+
     double sumTime = 0;
     for (int i = 0; i < 100; ++i){
         clock_t start = clock();
-        dijkstra_Matrix(graph, 0);
+
+        if (matrix){
+            dijkstra_Matrix(graph, 0);
+        } else {
+            dijkstra_Adj(g, 'a', 'e');
+            print_path(g, 'e');
+        }
+
         clock_t end = clock();
         double timeSpent = (double)(end - start)/CLOCKS_PER_SEC;
         sumTime = sumTime + timeSpent;
     }
     double timeResult = sumTime / 100;
-    printf("\nAverage time spent for Dense Matrix graph: %f", timeResult);
+    printf("\nAverage time spent for graph: %f", timeResult);
 
-
-    //             Adjacency Graph
-
-    graph_t *g = calloc(1, sizeof (graph_t));
-    translateMatrixToAdjacency(graph, V, g);
-    double sum = 0;
-    for(int i = 0; i<100; i++){
-        clock_t  start = clock();
-        dijkstra_Adj(g, 'a', 'e');
-        print_path(g, 'e');
-        clock_t  end = clock();
-        double timeSpent = (double)(end - start)/CLOCKS_PER_SEC;
-        sum += timeSpent;
-    }
-    double avgTime = sum / 100;
-    printf("\nAverage time spent for Dense Adjacency graph: %f", avgTime);
-
-
-    //              Matrix Graph
-    //int graph[V][V];
-    makeGraph(graph, V, false);
-    sumTime = 0;
-    for (int i = 0; i < 100; ++i){
-        clock_t start = clock();
-        dijkstra_Matrix(graph, 0);
-        clock_t end = clock();
-        double timeSpent = (double)(end - start)/CLOCKS_PER_SEC;
-        sumTime = sumTime + timeSpent;
-    }
-    timeResult = sumTime / 100;
-        printf("\nAverage time spent for Sparse Matrix graph: %f", timeResult);
-
-    //             Adjacency Graph
-
-    graph_t *g2 = calloc(1, sizeof (graph_t));
-    translateMatrixToAdjacency(graph, V, g2);
-    sum = 0;
-    for(int i = 0; i<100; i++){
-        clock_t  start = clock();
-        dijkstra_Adj(g2, 'a', 'e');
-        print_path(g2, 'e');
-        clock_t  end = clock();
-        double timeSpent = (double)(end - start)/CLOCKS_PER_SEC;
-        sum += timeSpent;
-    }
-    avgTime = sum / 100;
-        printf("\nAverage time spent for Sparse Adjacency graph: %f", avgTime);
-
-    return 0;
 }
 
