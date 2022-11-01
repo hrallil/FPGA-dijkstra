@@ -1,17 +1,17 @@
 // C program for Dijkstra's single source shortest path
 // algorithm. The program is for adjacency matrix
 // representation of the graph
-
 #include <limits.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
 
 //                  Matrix Graph
 // Number of vertices in the graph
 #define V 700
-#define RAND_MAX 1/*implementation defined*/
+//#define RAND_MAX 2/*implementation defined*/
 int RANDINT_MAX = 2147483647;
 //typedef enum (true, false) bool;
 
@@ -107,7 +107,7 @@ void makeGraph(int graph[V][V], int size, bool dense){
 }
 
 int randSparse(int n){
-    if (rand() == 1){
+    if (rand()%2 == 1){
         return randint(n);
     } else {
         return 0;
@@ -251,8 +251,8 @@ int pop_heap (heap_t *h) {
 
 void dijkstra_Adj (graph_t *g, int a, int b) {
     int i, j;
-    //a = a - 'a';
-    //b = b - 'a';
+    a = a - 'a';
+    b = b - 'a';
     for (i = 0; i < g->vertices_len; i++) {
         vertex_t *v = g->vertices[i];
         v->dist = INT_MAX;
@@ -300,7 +300,6 @@ void print_path (graph_t *g, int i) {
 }
 
 void translateMatrixToAdjacency(int graph[V][V], int size, graph_t *g){
-
     for (int i = 0; i < size; ++i){
         for (int j = 0; j < size; ++j){
             if (graph[i][j] != 0){
@@ -310,15 +309,30 @@ void translateMatrixToAdjacency(int graph[V][V], int size, graph_t *g){
     }
 }
 
+void printGraph(int graph[V][V]){
+    printf("\n");
+    for (int i = 0; i < V; ++i){
+            printf("[ ");
+        for (int j = 0; j < V; ++j){
+            printf("%d ", graph[i][j]);
+        }
+        printf("]\n");
+    }
+
+}
+
 // driver's code
 int main(){
     int graph[V][V];
     makeGraph(graph, V, true);
-    timeCalcDijkstra(graph, true);
-    timeCalcDijkstra(graph, false);
+    //printGraph(graph);
+    timeCalcDijkstra(graph, true);      //Dense Matrix
+    timeCalcDijkstra(graph, false);     //Dense Adjacency
+    //int graph2[V][V];
     makeGraph(graph, V, false);
-    timeCalcDijkstra(graph, true);
-    timeCalcDijkstra(graph, false);
+    //printGraph(graph);
+    timeCalcDijkstra(graph, true);      //Sparse Matrix
+    timeCalcDijkstra(graph, false);     //Sparse Adjacency
 
     return 0;
 }
