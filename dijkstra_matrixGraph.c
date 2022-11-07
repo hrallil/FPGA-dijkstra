@@ -88,8 +88,8 @@ void dijkstra(int graph[V][V], int src)
 int main()
 {
     /* Let us create the example graph discussed above */
-    //                    a  b  c  d  e  f  g  h  i
-    int graph[V][V] = { { 0, 4, 5, 8, 2,11, 9, 8, 1 },
+    //                    a  b  c  d  e  f  g  h  i  j  k  l  m  n  o  p  q  r  s  t
+    int graph[V][V] = makeGraph(20); /*{ { 0, 4, 5, 8, 2,11, 9, 8, 1,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  },
                         { 4, 0, 8, 3, 6, 6,13,11, 7 },
                         { 5, 8, 0, 7, 4, 4, 5, 4, 2 },
                         { 8, 3, 7, 0, 9,14, 7, 3, 4 },
@@ -97,7 +97,7 @@ int main()
                         {11, 6, 4,14,10, 0, 2, 9, 4 },
                         { 9,13, 5, 7,14, 2, 0, 1, 6 },
                         { 8,11, 8, 9,10, 7, 1, 0, 7 },
-                        { 1, 7, 2, 4, 7, 4, 6, 7, 0 } };
+                        { 1, 7, 2, 4, 7, 4, 6, 7, 0 } };*/
 
     // Function call
     double sumTime = 0;
@@ -111,4 +111,45 @@ int main()
     double timeResult = sumTime / 100;
     printf("Average time spent: %f", timeResult);
     return 0;
+}
+
+int* makeGraph(int size){
+    int graph[size][size];
+
+
+    for (int i = 0; i < size; ++i){
+        for (int j = i; j < size; ++j){
+            if (i == j){
+                graph[i][j] = 0;
+            } else {
+                int random = randint(15);
+                graph[i][j] = random;
+                graph[j][i] = random;
+            }
+        }
+    }
+    return graph*;
+}
+
+int randint(int n) {
+  if ((n - 1) == RAND_MAX) {
+    return rand();
+  } else {
+    // Supporting larger values for n would requires an even more
+    // elaborate implementation that combines multiple calls to rand()
+    assert (n <= RAND_MAX)
+
+    // Chop off all of the values that would cause skew...
+    int end = RAND_MAX / n; // truncate skew
+    assert (end > 0);
+    end *= n;
+
+    // ... and ignore results from rand() that fall above that limit.
+    // (Worst case the loop condition should succeed 50% of the time,
+    // so we can expect to bail out of this loop pretty quickly.)
+    int r;
+    while ((r = rand()) >= end);
+
+    return r % n;
+  }
 }

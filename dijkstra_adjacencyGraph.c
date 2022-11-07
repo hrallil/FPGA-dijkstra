@@ -211,7 +211,7 @@ int main () {
     add_edge(g, 'e', 'g', 14);
     add_edge(g, 'e', 'h', 10);
     add_edge(g, 'e', 'i', 7);
-    
+
     add_edge(g, 'f', 'a', 11);
     add_edge(g, 'f', 'b', 6);
     add_edge(g, 'f', 'c', 4);
@@ -225,7 +225,7 @@ int main () {
     add_edge(g, 'g', 'b', 13);
     add_edge(g, 'g', 'c', 5);
     add_edge(g, 'g', 'd', 7);
-    add_edge(g, 'g', '3', 14);
+    add_edge(g, 'g', 'e', 14);
     add_edge(g, 'g', 'f', 2);
     add_edge(g, 'g', 'h', 1);
     add_edge(g, 'g', 'i', 6);
@@ -247,7 +247,7 @@ int main () {
     add_edge(g, 'i', 'f', 4);
     add_edge(g, 'i', 'g', 6);
     add_edge(g, 'i', 'h', 7);
-    
+
     double sum = 0;
     for(int i = 0; i<100; i++){
         clock_t  start = clock();
@@ -258,7 +258,7 @@ int main () {
         sum += timeSpent;
     }
 
-    double avgTime = sum/100
+    double avgTime = sum/100;
     printf("time spent: %f \n",avgTime);
     return 0;
 }
